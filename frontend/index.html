@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0b1220">
+    <title>Parkwise | Smart Parking</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="app.js?v=2"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Parkwise home">
+          <span class="brand-mark" aria-hidden="true">P</span>
+          <span>parkwise<span class="brand-period">.</span></span>
+        </a>
+        <div class="topbar-right">
+          <span class="live-indicator" id="connection-status">
+            <span class="status-dot" aria-hidden="true"></span>
+            Connecting
+          </span>
+          <span class="topbar-date" id="current-date"></span>
+          <span class="avatar" aria-label="Admin account">A</span>
+        </div>
+      </header>
+
+      <main>
+        <section class="page-heading">
+          <div>
+            <p class="eyebrow">PARKING OPERATIONS</p>
+            <h1>Good parking starts here<span class="heading-period">.</span></h1>
+            <p class="subtitle">Live overview of your facility and every parking bay.</p>
+          </div>
+          <div class="rate-chip">
+            <span class="rate-icon" aria-hidden="true">₹</span>
+            <span><strong id="hourly-rate">₹40</strong> / hour <small>· minimum <span id="minimum-charge">₹20</span></small></span>
+          </div>
+        </section>
+
+        <section class="metrics" aria-label="Parking analytics">
+          <article class="metric-card">
+            <div class="metric-top"><span>Total capacity</span><span class="metric-icon capacity-icon" aria-hidden="true">▦</span></div>
+            <div class="metric-value" id="total-capacity">—</div>
+            <div class="metric-foot">Parking bays across all floors</div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-top"><span>Currently occupied</span><span class="metric-icon occupied-icon" aria-hidden="true">↗</span></div>
+            <div class="metric-value" id="occupied-count">—</div>
+            <div class="metric-foot"><span class="tiny-dot red-dot"></span><span id="occupied-foot">Vehicles parked</span></div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-top"><span>Available now</span><span class="metric-icon available-icon" aria-hidden="true">✓</span></div>
+            <div class="metric-value" id="available-count">—</div>
+            <div class="metric-foot"><span class="tiny-dot green-dot"></span>Ready for arrival</div>
+          </article>
+          <article class="metric-card occupancy-card">
+            <div class="metric-top"><span>Facility occupancy</span><span class="metric-icon occupancy-icon" aria-hidden="true">◔</span></div>
+            <div class="metric-value"><span id="occupancy-rate">—</span><small>%</small></div>
+            <div class="progress-track"><span id="occupancy-progress"></span></div>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <section class="panel parking-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">LIVE FLOOR PLAN</p>
+                <h2>Parking bays</h2>
+              </div>
+              <div class="floor-tabs" role="group" aria-label="Filter parking bays by floor">
+                <button class="floor-tab is-active" type="button" data-floor="all">All floors</button>
+                <button class="floor-tab" type="button" data-floor="1">Floor 1</button>
+                <button class="floor-tab" type="button" data-floor="2">Floor 2</button>
+              </div>
+            </div>
+            <div class="legend" aria-label="Bay state legend">
+              <span><i class="legend-dot available"></i>Available</span>
+              <span><i class="legend-dot occupied"></i>Occupied</span>
+              <span><i class="legend-dot reserved"></i>Reserved</span>
+            </div>
+            <div id="floor-sections" class="floor-sections" aria-live="polite">
+              <p class="loading-message">Loading live parking bays…</p>
+            </div>
+            <p class="interaction-hint">Select an available bay to check in a vehicle, or an occupied bay to check it out.</p>
+          </section>
+
+          <aside class="side-column">
+            <section class="panel reservation-panel">
+              <div class="panel-heading compact-heading">
+                <div>
+                  <p class="eyebrow">PLAN AHEAD</p>
+                  <h2>New reservation</h2>
+                </div>
+                <span class="panel-icon" aria-hidden="true">⌖</span>
+              </div>
+              <form id="reservation-form">
+                <label for="reservation-bay">Available bay</label>
+                <select id="reservation-bay" name="bay_id" required>
+                  <option value="">Choose a bay</option>
+                </select>
+                <label for="reservation-plate">License plate</label>
+                <input id="reservation-plate" name="license_plate" type="text" maxlength="20" placeholder="e.g. KA-01-AB-1234" required>
+                <button class="primary-button" type="submit">Reserve parking bay <span aria-hidden="true">→</span></button>
+              </form>
+              <div class="reservation-list-heading">
+                <h3>Active reservations</h3>
+                <span id="reservation-count" class="count-pill">0</span>
+              </div>
+              <div id="reservation-list" class="reservation-list">
+                <p class="empty-state">No active reservations.</p>
+              </div>
+            </section>
+
+            <section class="panel activity-panel">
+              <div class="panel-heading compact-heading">
+                <div>
+                  <p class="eyebrow">FACILITY FEED</p>
+                  <h2>Recent activity</h2>
+                </div>
+                <span class="activity-live"><i class="tiny-dot green-dot"></i> LIVE</span>
+              </div>
+              <ol id="activity-list" class="activity-list" aria-live="polite">
+                <li class="empty-state">Waiting for parking activity…</li>
+              </ol>
+            </section>
+          </aside>
+        </section>
+        <p id="page-error" class="page-error" role="alert" hidden></p>
+      </main>
+      <footer class="footer">
+        <span>Parkwise facility management</span>
+        <span>Real-time parking operations</span>
+      </footer>
+    </div>
+  </body>
+</html>
