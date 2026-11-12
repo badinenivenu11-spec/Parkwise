@@ -2,7 +2,9 @@
 
 > **Final-Year Academic Project Demonstration**  
 > Built with the **MERN Stack**: React (Vite) • Node.js • Express.js • MongoDB • Tailwind CSS • Leaflet OpenStreetMap • Recharts
-
+**Live Demo:** https://parkease-ngzq.vercel.app/
+**GitHub:** https://github.com/badinenivenu11-spec/Parkwise
+> 
 
  
 ## 🅿️ Project Overview
